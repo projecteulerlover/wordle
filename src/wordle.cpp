@@ -17,9 +17,15 @@ namespace {
 
 constexpr int kCandidateSizeToPrintAll = 15;
 constexpr string_view kAllCorrectResult = "22222";
+constexpr int kAlphabetSize = 26;
 
 bool IsLetterAllowed(int bitmask, char chr) {
   return !(bitmask >> (chr - 'a') & 1);
+}
+
+bool IsLetterOnlyChoice(int bitmask, char chr) {
+  return IsLetterAllowed(bitmask, chr) &&
+         (1UL << 26) - 1 == ((1UL << (chr - 'a')) + bitmask);
 }
 
 void SetLetterNotAllowed(int &bitmask, char chr) {
@@ -187,9 +193,10 @@ pair<string, double> Wordle::GetBestGuess() {
       }
       for (int i = 0; i < length_; ++i) {
         curr_score +=
-            (i == index++ ? 1.5 : 1.0) * letter_count[i][letter_index];
+            (i == index ? 1.5 : 1.0) * letter_count[i][letter_index];
       }
       unique_letters[letter_index] = true;
+      ++index;
     }
     if (curr_score > best_score) {
       best_score = curr_score;

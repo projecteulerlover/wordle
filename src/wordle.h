@@ -8,7 +8,7 @@
 struct Constraints {
   // A vector of size `length_` (5 currently). Each contained int is a bitmask
   // of currently acceptable letters for that letter location. That is, the i-th
-  // bit of letters[j = 1 <=> the j-th character of the answer cannot be the
+  // bit of letters[j = 1 <=> the j-th character of the answer *cannot* be the
   // i-th letter of the alphabet.
   //   e.g., if the vector is <0_2, 1_2, 10_2, 100_2, 1000_2>, it means the
   //           - 1st letter has no restrictions
