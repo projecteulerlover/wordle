@@ -1,13 +1,12 @@
 #include <iostream>
 #include <memory>
 
-#include "wordle.h"
+#include "wordle_solver.h"
+#include "constants.h"
 
 using namespace std;
 
-constexpr int kDefaultWordLength = 5;
-
 int main() {
-  unique_ptr<Wordle> wordle = make_unique<Wordle>(kDefaultWordLength);
+  unique_ptr<WordleSolver> wordle = make_unique<WordleSolver>(kDefaultWordLength);
   wordle->Solve();
 }
