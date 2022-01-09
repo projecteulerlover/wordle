@@ -62,7 +62,7 @@ class Wordle {
 
         // Scores all the words in `candidates_`, regardless of whether or not they can still be
         // the answer, and returns the word with the highest score.
-        std::string GetBestGuess();
+        std::pair<std::string, double> GetBestGuess();
 
         // Checks if the user inputs for `guess` and `result` are syntactically correct, otherwise
         // prompts the user again for these values.

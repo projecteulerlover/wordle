@@ -34,7 +34,7 @@ bool Wordle::ValidConstraints(string_view guess, string_view result)
 {
     bool ok = true;
     // Length check.
-    ok &= (guess.size() == length_ && result.size() == length_);
+    ok &= (static_cast<int>(guess.size()) == length_ && static_cast<int>(result.size()) == length_);
     // Guess check.
     for (const char chr : guess)
     {
@@ -183,12 +183,12 @@ void Wordle::UpdateCandidates()
     }
 }
 
-string Wordle::GetBestGuess()
+pair<string, double> Wordle::GetBestGuess()
 {
-    vector<vector<int>> letter_count;
+    vector<vector<double>> letter_count;
     for (int i = 0; i < length_; ++i)
     {
-        letter_count.push_back(vector<int>(26, 0));
+        letter_count.push_back(vector<double>(26, 0.0));
     }
 
     for (const auto &candidate : candidates_)
@@ -201,7 +201,7 @@ string Wordle::GetBestGuess()
         }
     }
 
-    int best_score = 0;
+    double best_score = 0.0;
     string best_guess;
     for (const auto &candidate : candidates_)
     {
@@ -213,7 +213,7 @@ string Wordle::GetBestGuess()
         string_view word = candidate.first;
         vector<bool> unique_letters(26, false);
 
-        int curr_score = 0;
+        double curr_score = 0.0;
         int index = 0;
         for (const auto &chr : word)
         {
@@ -222,7 +222,9 @@ string Wordle::GetBestGuess()
             {
                 continue;
             }
-            curr_score += letter_count[index][letter_index];
+            for (int i=0; i<length_; ++i) {
+                curr_score += (i == index++ ? 1.5 : 1.0) * letter_count[i][letter_index];
+            }
             unique_letters[letter_index] = true;
         }
         if (curr_score > best_score)
@@ -231,7 +233,7 @@ string Wordle::GetBestGuess()
             best_guess = word;
         }
     }
-    return best_guess;
+    return make_pair(best_guess, best_score);
 }
 
 void Wordle::SolveOnce()
@@ -254,8 +256,6 @@ void Wordle::SolveOnce()
         }
         cout << endl;
     }
-    else
-    {
-        cout << "Best guess: " << GetBestGuess() << endl;
-    }
+    const auto best = GetBestGuess();
+    cout << "Best guess: " << best.first << " with score " << best.second << endl;
 }
