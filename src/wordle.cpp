@@ -187,7 +187,7 @@ pair<string, double> Wordle::GetBestGuess() {
       }
       for (int i = 0; i < length_; ++i) {
         curr_score +=
-            (i == index++ ? 1000000.0 : 1.0) * letter_count[i][letter_index];
+            (i == index++ ? 1.5 : 1.0) * letter_count[i][letter_index];
       }
       unique_letters[letter_index] = true;
     }
