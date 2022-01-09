@@ -54,7 +54,7 @@ class Wordle {
         bool FitsConstraints(std::string_view word);
 
         // Uses the `guess` and `result` to update `constraints_`.
-        void UpdateConstraints(std::string_view guess, string_view result);
+        void UpdateConstraints(std::string_view guess, std::string_view result);
 
         // Uses `constraints` to modify whether a word in `candidates_` is still in the running
         // as the answer.
@@ -62,7 +62,7 @@ class Wordle {
 
         // Scores all the words in `candidates_`, regardless of whether or not they can still be
         // the answer, and returns the word with the highest score.
-        string GetBestGuess();
+        std::string GetBestGuess();
 
         // Checks if the user inputs for `guess` and `result` are syntactically correct, otherwise
         // prompts the user again for these values.
@@ -72,7 +72,7 @@ class Wordle {
         // Member variables.
         int length_;
 
-        std::unordered_map<string, bool> candidates_;
+        std::unordered_map<std::string, bool> candidates_;
 
         Constraints constraints_;
 };
