@@ -120,13 +120,11 @@ void Wordle::UpdateConstraints(string_view guess, string_view result) {
                 constraints_.must_contain.insert(chr);
                 break;
             case State::kCorrect:
-                for (int j = 0; j < length_; ++j) {
-                    for (char c = 'a'; c <= 'z'; ++c) {
-                        if (c == chr) {
-                            continue;
-                        }
-                        SetLetterNotAllowed(constraints_.letters[j], c);
+                for (char c = 'a'; c <= 'z'; ++c) {
+                    if (c == chr) {
+                        continue;
                     }
+                    SetLetterNotAllowed(constraints_.letters[i], c);
                 }
                 constraints_.must_contain.insert(chr);
                 break;
@@ -134,13 +132,13 @@ void Wordle::UpdateConstraints(string_view guess, string_view result) {
                 cout << "Should not happen" << endl;
         }
     }
-    // cout << "logging constraints" << endl;
-    // for (char must : constraints_.must_contain) {
-    //     cout << must << endl;
-    // }
-    // for (int bitmask : constraints_.letters) {
-    //     cout << bitmask << endl;
-    // }
+    cout << "logging constraints" << endl;
+    for (char must : constraints_.must_contain) {
+        cout << must << endl;
+    }
+    for (int bitmask : constraints_.letters) {
+        cout << bitmask << endl;
+    }
 }
 
 void Wordle::PurgeCandidates() {
