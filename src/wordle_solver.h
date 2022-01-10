@@ -31,8 +31,6 @@ class WordleSolver {
  public:
   WordleSolver(std::size_t word_length);
 
-  ~WordleSolver();
-
   // Solves the current game, with user input.
   // 1. Logs the "best" guess.
   //    e.g. $ Best guess: "carbs"

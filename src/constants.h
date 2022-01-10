@@ -15,9 +15,6 @@ enum class State {
 // Word length.
 constexpr int kDefaultWordLength = 5;
 
-// State of `results` when the guess is correct.
-constexpr std::string_view kAllCorrectResult = "22222";
-
 // Number of candidates left where we choose to print all candidates to CLI.
 constexpr int kCandidateSizeToPrintAll = 15;
 

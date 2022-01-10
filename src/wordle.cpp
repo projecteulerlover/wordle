@@ -69,7 +69,9 @@ void Wordle::Play() {
   do {
     bool won = GuessOnce();
     if (won) {
-      cout << "Congrats, your guess was correct!" << endl;
+      int tries = guesses_.size() + 1;
+      cout << "\033[1;32mCongrats, your guess was correct!\033[0m "
+           << "It only took you " << tries << (tries == 1 ? " try " : " tries ") << ":)" << endl;
       return;
     } else {
       cout << "Game state so far: \n";
@@ -109,7 +111,6 @@ vector<std::string> Wordle::GetColorizedGuessAndUpdateGameState(
         state = State::kAppears;
       }
     }
-    cout << static_cast<int>(state);
     guess_with_color.push_back(GetColorizedLetter(state, chr));
     if (game_state_[chr - 'A'] == State::kCorrect && state == State::kAppears) {
       continue;

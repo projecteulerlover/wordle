@@ -91,6 +91,7 @@ bool WordleSolver::FitsConstraints(string_view word) {
 
 void WordleSolver::Solve() {
   string guess, result;
+  string all_correct_result(length_, '2');
 
   SolveOnce();
   while (true) {
@@ -103,7 +104,7 @@ void WordleSolver::Solve() {
       cout << "Input result: ";
       cin >> result;
     } while (!ValidConstraints(guess, result));
-    if (result == kAllCorrectResult) {
+    if (result == all_correct_result) {
       cout << "Done! Congrats :)" << endl;
       break;
     } else {

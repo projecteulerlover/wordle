@@ -13,25 +13,26 @@ class Wordle {
  public:
   Wordle(int word_length);
 
-  ~Wordle();
-
   void Play();
 
  private:
   void LogGuessesSoFar();
 
-  std::vector<std::string> GetColorizedGuessAndUpdateGameState(std::string_view guess);
+  std::vector<std::string> GetColorizedGuessAndUpdateGameState(
+      std::string_view guess);
 
   bool GuessOnce();
 
   // Member variables.
   std::size_t length_;
 
+  // Stores the state of every letter of the alphabet.
   std::vector<State> game_state_;
 
   // A particular word in `candidates_`.
   std::string goal_;
 
+  // Set of words in the internal dictionary.
   std::unordered_set<std::string> candidates_;
 
   // A vector of guesses so far. Using a vector to store each character of
