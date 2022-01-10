@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jan 08 19:30:23 2022
+# Make data base, printed on Sun Jan 09 17:55:22 2022
 
 # Variables
 
@@ -27,7 +27,7 @@ MD := mkdir
 # environment
 LOCALAPPDATA = C:\Users\kevin\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-174e17d3-9590-4cb0-b50a-f39cc11bf5fa-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-ac8d766e-73fa-4629-aca8-c2f5b2b5e75c-sock
 # environment
 VSCODE_CWD = C:\Users\kevin\AppData\Local\Programs\Microsoft VS Code
 # environment
@@ -43,7 +43,7 @@ MAKE_COMMAND := make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_8460_QDYCDFPIQASCHQHP
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_5048_NESZIRHIVSRBZOCL
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -62,7 +62,8 @@ VSCODE_LOG_STACK = false
 VSCODE_CODE_CACHE_PATH = C:\Users\kevin\AppData\Roaming\Code\CachedData\899d46d82c4c95423fb7e10e68eba52050e30ba3
 # environment
 LANG = C
-# default
+# defau 
+lt
 .LOADED := 
 # environment
 TMP = C:\Users\kevin\AppData\Local\Temp
@@ -85,8 +86,7 @@ PROGRAMFILES = C:\Program Files
 # environment
 MFLAGS = -pqrR
 # makefile (from 'Makefile', line 65)
-OUTPUTMAIN := ou 
-tput\main.exe
+OUTPUTMAIN := output\main.exe
 # default
 .SHELLFLAGS := -c
 # environment
@@ -100,7 +100,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 8460
+VSCODE_PID = 5048
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # makefile (from 'Makefile', line 48)
@@ -172,7 +172,7 @@ PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # makefile (from 'Makefile', line 57)
-OBJECTS := src/main.o src/wordle.o
+OBJECTS := src/main.o src/wordle.o src/wordle_solver.o
 # environment
 USERDOMAIN = DESKTOP-RUL0JNP
 # 'override' directive
@@ -234,7 +234,7 @@ CXX = g++
 # makefile (from 'Makefile', line 15)
 LFLAGS = 
 # makefile (from 'Makefile', line 54)
-SOURCES := src/main.cpp src/wordle.cpp
+SOURCES := src/main.cpp src/wordle.cpp src/wordle_solver.cpp
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
 # variable set hash-table stats:
@@ -246,10 +246,10 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
 
 # Directories
 
-# src (key c:/Users/kevin/wordle/src, mtime 1641622919): 7 files, no impossibilities.
-# . (key c:/Users/kevin/wordle, mtime 1641358166): 9 files, no impossibilities.
+# src (key c:/Users/kevin/wordle/src, mtime 1641756067): 11 files, no impossibilities.
+# . (key c:/Users/kevin/wordle, mtime 1641696521): 11 files, no impossibilities.
 
-# 16 files, no impossibilities in 2 directories.
+# 22 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -257,7 +257,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
 
 # Files
 
-main.exe: src/main.o src/wordle.o
+main.exe: src/main.o src/wordle.o src/wordle_solver.o
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: ''
 #  File does not exist.
@@ -270,13 +270,13 @@ main.exe: src/main.o src/wordle.o
 # automatic
 # < := src/main.o
 # automatic
-# + := src/main.o src/wordle.o
+# + := src/main.o src/wordle.o src/wordle_solver.o
 # automatic
 # % := 
 # automatic
-# ^ := src/main.o src/wordle.o
+# ^ := src/main.o src/wordle.o src/wordle_solver.o
 # automatic
-# ? := src/main.o src/wordle.o
+# ? := src/main.o src/wordle.o src/wordle_solver.o
 # automatic
 # | := 
 # variable set hash-table stats:
@@ -311,7 +311,7 @@ clean:
 # Not a target:
 src/main.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-01-06 00:09:29
+#  Last modified 2022-01-09 14:06:56
 #  File has been updated.
 #  Successfully updated.
 
@@ -323,7 +323,7 @@ src/main.o:
 
 output:
 #  Implicit rule search has not been done.
-#  Last modified 2022-01-08 01:21:59
+#  Last modified 2022-01-09 14:21:07
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 71):
@@ -349,9 +349,16 @@ run: all
 	@echo Executing 'run: all' complete!
 
 # Not a target:
+src/wordle_solver.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-01-09 14:21:07
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
 src/wordle.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-01-08 01:21:59
+#  Last modified 2022-01-09 14:21:06
 #  File has been updated.
 #  Successfully updated.
 
@@ -367,19 +374,19 @@ src/wordle.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=12/1024=1%, Rehash=0, Collisions=0/33=0%
+# Load=13/1024=1%, Rehash=0, Collisions=0/35=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 24 / storage = 180 B / avg = 7 B
-# current buf: size = 8162 B / used = 180 B / count = 24 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 31 / storage = 277 B / avg = 8 B
+# current buf: size = 8162 B / used = 277 B / count = 31 / avg = 8 B
 
-# strcache performance: lookups = 45 / hit rate = 46%
+# strcache performance: lookups = 52 / hit rate = 40%
 # hash-table stats:
-# Load=24/8192=0%, Rehash=0, Collisions=0/45=0%
-# Finished Make data base on Sat Jan 08 19:30:23 2022
+# Load=31/8192=0%, Rehash=0, Collisions=0/52=0%
+# Finished Make data base on Sun Jan 09 17:55:22 2022
 
  

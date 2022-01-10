@@ -1,8 +1,13 @@
+#ifndef WORDLE_SRC_WORDLE_SOLVER_H
+#define WORDLE_SRC_WORDLE_SOLVER_H
+
 #include <string>
 #include <string_view>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+
+#include "constants.h"
 
 // Constraints from the current guesses.
 struct Constraints {
@@ -22,16 +27,9 @@ struct Constraints {
   std::unordered_set<char> must_contain;
 };
 
-// State corresponding to result for each letter.
-enum class State {
-  kNone = 0,     // gray in UI
-  kAppears = 1,  // yellow in UI
-  kCorrect = 2,  // green in UI
-};
-
 class WordleSolver {
  public:
-  WordleSolver(int word_length);
+  WordleSolver(std::size_t word_length);
 
   // Solves the current game, with user input.
   // 1. Logs the "best" guess.
@@ -72,9 +70,11 @@ class WordleSolver {
   bool ValidConstraints(std::string_view guess, std::string_view result);
 
   // Member variables.
-  int length_;
+  std::size_t length_;
 
   std::unordered_map<std::string, bool> candidates_;
 
   Constraints constraints_;
 };
+
+#endif  // WORDLE_SRC_WORDLE_SOLVER_H

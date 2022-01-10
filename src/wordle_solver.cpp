@@ -10,6 +10,7 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
+
 #include "constants.h"
 
 using namespace std;
@@ -17,33 +18,33 @@ using namespace std;
 namespace {
 
 bool IsLetterAllowed(int bitmask, char chr) {
-  return !(bitmask >> (chr - 'a') & 1);
+  return !(bitmask >> (chr - 'A') & 1);
 }
 
 bool IsLetterOnlyChoice(int bitmask, char chr) {
   return IsLetterAllowed(bitmask, chr) &&
-         (1UL << 26) - 1 == ((1UL << (chr - 'a')) + bitmask);
+         (1UL << 26) - 1 == ((1UL << (chr - 'A')) + bitmask);
 }
 
 void SetLetterNotAllowed(int &bitmask, char chr) {
-  bitmask |= 1UL << (chr - 'a');
+  bitmask |= 1UL << (chr - 'A');
 }
 
 }  // namespace
 
-WordleSolver::WordleSolver(int word_length) {
+WordleSolver::WordleSolver(size_t word_length) {
   length_ = word_length;
 
   constraints_.letters.reserve(length_);
-  for (int i = 0; i < length_; ++i) {
+  for (size_t i = 0; i < length_; ++i) {
     constraints_.letters.push_back(0);
   }
 
   ifstream infile("word_bank\\" + to_string(length_) + ".words");
   string word;
   while (infile >> word) {
-    assert(int(word.size()) == length_);
-    transform(word.begin(), word.end(), word.begin(), ::tolower);
+    assert(word.size() == length_);
+    transform(word.begin(), word.end(), word.begin(), ::toupper);
     candidates_.insert({word, true});
   }
 }
@@ -51,11 +52,10 @@ WordleSolver::WordleSolver(int word_length) {
 bool WordleSolver::ValidConstraints(string_view guess, string_view result) {
   bool ok = true;
   // Length check.
-  ok &= (static_cast<int>(guess.size()) == length_ &&
-         static_cast<int>(result.size()) == length_);
+  ok &= (guess.size() == length_ && result.size() == length_);
   // Guess check.
   for (const char chr : guess) {
-    if (!('a' <= chr && chr <= 'z')) {
+    if (!('A' <= chr && chr <= 'Z')) {
       ok = false;
       break;
     }
@@ -97,6 +97,9 @@ void WordleSolver::Solve() {
     do {
       cout << "Input guess: ";
       cin >> guess;
+
+      transform(guess.begin(), guess.end(), guess.begin(), ::toupper);
+      
       cout << "Input result: ";
       cin >> result;
     } while (!ValidConstraints(guess, result));
@@ -111,12 +114,12 @@ void WordleSolver::Solve() {
 }
 
 void WordleSolver::UpdateConstraints(string_view guess, string_view result) {
-  for (int i = 0; i < length_; ++i) {
+  for (size_t i = 0; i < length_; ++i) {
     char chr = guess[i];
     State state = static_cast<State>(result[i] - '0');
     switch (state) {
       case State::kNone:
-        for (int j = 0; j < length_; ++j) {
+        for (size_t j = 0; j < length_; ++j) {
           SetLetterNotAllowed(constraints_.letters[j], chr);
         }
         break;
@@ -125,7 +128,7 @@ void WordleSolver::UpdateConstraints(string_view guess, string_view result) {
         constraints_.must_contain.insert(chr);
         break;
       case State::kCorrect:
-        for (char c = 'a'; c <= 'z'; ++c) {
+        for (char c = 'A'; c <= 'Z'; ++c) {
           if (c == chr) {
             continue;
           }
@@ -135,6 +138,7 @@ void WordleSolver::UpdateConstraints(string_view guess, string_view result) {
         break;
       default:
         cout << "Should not happen" << endl;
+        assert(false);
     }
   }
   // cout << "logging constraints" << endl;
@@ -159,7 +163,7 @@ void WordleSolver::UpdateCandidates() {
 
 pair<string, double> WordleSolver::GetBestGuess() {
   vector<vector<double>> letter_count;
-  for (int i = 0; i < length_; ++i) {
+  for (size_t i = 0; i < length_; ++i) {
     letter_count.push_back(vector<double>(26, 0.0));
   }
 
@@ -167,7 +171,7 @@ pair<string, double> WordleSolver::GetBestGuess() {
     string_view word = candidate.first;
     int index = 0;
     for (const auto &chr : word) {
-      ++letter_count[index++][chr - 'a'];
+      ++letter_count[index++][chr - 'A'];
     }
   }
 
@@ -182,15 +186,14 @@ pair<string, double> WordleSolver::GetBestGuess() {
     vector<bool> unique_letters(26, false);
 
     double curr_score = 0.0;
-    int index = 0;
+    size_t index = 0;
     for (const auto &chr : word) {
-      int letter_index = chr - 'a';
+      int letter_index = chr - 'A';
       if (unique_letters[letter_index]) {
         continue;
       }
-      for (int i = 0; i < length_; ++i) {
-        curr_score +=
-            (i == index ? 1.5 : 1.0) * letter_count[i][letter_index];
+      for (size_t i = 0; i < length_; ++i) {
+        curr_score += (i == index ? 1.5 : 1.0) * letter_count[i][letter_index];
       }
       unique_letters[letter_index] = true;
       ++index;

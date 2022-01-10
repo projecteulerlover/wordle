@@ -32,7 +32,23 @@
         "tuple": "cpp",
         "type_traits": "cpp",
         "typeinfo": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "atomic": "c",
+        "bit": "c",
+        "cstdarg": "c",
+        "cstddef": "c",
+        "deque": "c",
+        "set": "c",
+        "unordered_set": "c",
+        "algorithm": "c",
+        "functional": "c",
+        "iterator": "c",
+        "memory": "c",
+        "memory_resource": "c",
+        "numeric": "c",
+        "optional": "c",
+        "random": "c",
+        "sstream": "c"
     },
     "editor.tokenColorCustomizations": {
         "textMateRules": [
