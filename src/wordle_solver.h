@@ -48,8 +48,8 @@ class WordleSolver {
   void Solve();
 
  private:
-  // Performs one iteration; steps 1-3 above.
-  void SolveOnce();
+  // Performs one iteration; steps 1-3 above. Returns the best guess.
+  std::string SolveOnce();
 
   // Checks if the given word fits `constraints`.
   bool FitsConstraints(std::string_view word);

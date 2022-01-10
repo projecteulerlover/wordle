@@ -93,11 +93,14 @@ void WordleSolver::Solve() {
   string guess, result;
   string all_correct_result(length_, '2');
 
-  SolveOnce();
+  string best_guess = SolveOnce();
   while (true) {
     do {
       cout << "Input guess: ";
       cin >> guess;
+      if (guess == ".") {
+        guess = best_guess;
+      }
 
       transform(guess.begin(), guess.end(), guess.begin(), ::toupper);
       
@@ -194,7 +197,11 @@ pair<string, double> WordleSolver::GetBestGuess() {
         continue;
       }
       for (size_t i = 0; i < length_; ++i) {
-        curr_score += (i == index ? 1.5 : 1.0) * letter_count[i][letter_index];
+        double multiplier = 1.0;
+        if (i == index) {
+          multiplier = IsLetterAllowed(constraints_.letters[i], chr) ? -0.5 : 1.5;
+        }
+        curr_score += multiplier * letter_count[i][letter_index];
       }
       unique_letters[letter_index] = true;
       ++index;
@@ -207,7 +214,7 @@ pair<string, double> WordleSolver::GetBestGuess() {
   return make_pair(best_guess, best_score);
 }
 
-void WordleSolver::SolveOnce() {
+string WordleSolver::SolveOnce() {
   UpdateCandidates();
   int candidate_size = count_if(
       candidates_.begin(), candidates_.end(),
@@ -226,4 +233,5 @@ void WordleSolver::SolveOnce() {
   }
   const auto best = GetBestGuess();
   cout << "Best guess: " << best.first << " with score " << best.second << endl;
+  return best.first;
 }
