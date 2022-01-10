@@ -61,7 +61,7 @@ Wordle::Wordle(int word_length) {
     game_state_.push_back(State::kUnknown);
   }
   // Delete this.
-  cout << goal_ << endl;
+  // cout << goal_ << endl;
 }
 
 void Wordle::Play() {
