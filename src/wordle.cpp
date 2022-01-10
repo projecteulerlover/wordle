@@ -72,6 +72,7 @@ void Wordle::Play() {
       cout << "Congrats, your guess was correct!" << endl;
       break;
     } else {
+      cout << "Game state so far: \n";
       for (const auto& row : kKeyboardView) {
         for (const char chr : row) {
           cout << GetColorizedLetter(game_state_[chr - 'A'], chr) << "  ";
@@ -86,6 +87,7 @@ void Wordle::Play() {
 vector<std::string> Wordle::GetColorizedGuessAndUpdateGameState(
     string_view guess) {
   vector<std::string> guess_with_color;
+  
   for (size_t i = 0; i < length_; ++i) {
     const char chr = guess[i];
     const auto position = goal_.find(chr);
@@ -125,6 +127,7 @@ bool Wordle::GuessOnce() {
   string guess;
   cout << "Make your guess: ";
   cin >> guess;
+  cout << endl;
 
   transform(guess.begin(), guess.end(), guess.begin(), ::toupper);
 
