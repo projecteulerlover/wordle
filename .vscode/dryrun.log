@@ -1,7 +1,6 @@
 make.exe --dry-run --keep-going --print-directory
 make: Entering directory 'c:/Users/kevin/wordle'
-g++ -std=c++17 -Wall -Wextra -g -static -Iinclude -o output\main.exe src/main.o src/wordle.o src/wordle_solver.o  -Llib
+g++ -std=c++17 -Wall -Wextra -g -Iinclude -o output\main.exe src/main.o src/wordle.o src/wordle_solver.o  -Llib
 echo Executing 'all' complete!
- 
 make: Leaving directory 'c:/Users/kevin/wordle'
  

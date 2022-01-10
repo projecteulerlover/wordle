@@ -6,7 +6,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jan 10 00:12:39 2022
+# Make data base, printed on Mon Jan 10 00:32:08 2022
 
 # Variables
 
@@ -27,8 +27,7 @@ MD := mkdir
 # environment
 LOCALAPPDATA = C:\Users\kevin\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-6489814 
-9-aa61-4759-8fce-5d26bc45336b-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-64898149-aa61-4759-8fce-5d26bc45336b-sock
 # environment
 VSCODE_CWD = C:\Users\kevin\AppData\Local\Programs\Microsoft VS Code
 # environment
@@ -86,7 +85,8 @@ PROGRAMFILES = C:\Program Files
 # environment
 MFLAGS = -pqrR
 # makefile (from 'Makefile', line 65)
-OUTPUTMAIN := output\main.exe
+OUTPUTMAIN := o 
+utput\main.exe
 # default
 .SHELLFLAGS := -c
 # environment
@@ -224,7 +224,7 @@ ALLUSERSPROFILE = C:\ProgramData
 # environment
 SESSIONNAME = Console
 # makefile (from 'Makefile', line 10)
-CXXFLAGS := -std=c++17 -Wall -Wextra -g -static
+CXXFLAGS := -std=c++17 -Wall -Wextra -g
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync load
 # environment
@@ -246,7 +246,7 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
 
 # Directories
 
-# src (key c:/Users/kevin/wordle/src, mtime 1641791444): 11 files, no impossibilities.
+# src (key c:/Users/kevin/wordle/src, mtime 1641792171): 11 files, no impossibilities.
 # . (key c:/Users/kevin/wordle, mtime 1641696521): 11 files, no impossibilities.
 
 # 22 files, no impossibilities in 2 directories.
@@ -287,7 +287,7 @@ main.exe: src/main.o src/wordle.o src/wordle_solver.o
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-01-10 00:12:31
+#  Last modified 2022-01-10 00:32:02
 #  File has been updated.
 #  Successfully updated.
 
@@ -311,7 +311,7 @@ clean:
 # Not a target:
 src/main.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-01-09 23:33:33
+#  Last modified 2022-01-10 00:12:47
 #  File has been updated.
 #  Successfully updated.
 
@@ -323,7 +323,7 @@ src/main.o:
 
 output:
 #  Implicit rule search has not been done.
-#  Last modified 2022-01-10 00:12:37
+#  Last modified 2022-01-10 00:32:04
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 71):
@@ -351,14 +351,14 @@ run: all
 # Not a target:
 src/wordle_solver.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-01-09 23:40:28
+#  Last modified 2022-01-10 00:12:50
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/wordle.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-01-10 00:10:44
+#  Last modified 2022-01-10 00:22:51
 #  File has been updated.
 #  Successfully updated.
 
@@ -387,6 +387,6 @@ src/wordle.o:
 # strcache performance: lookups = 52 / hit rate = 40%
 # hash-table stats:
 # Load=31/8192=0%, Rehash=0, Collisions=0/52=0%
-# Finished Make data base on Mon Jan 10 00:12:39 2022
+# Finished Make data base on Mon Jan 10 00:32:08 2022
 
  

@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 
 #include <iostream>
@@ -19,7 +20,7 @@ int main(int argc, char** argv) {
     wordle_solver->Solve();
   } else {
     cout << "Unrecognized command." << endl;
-    return 1;
+    return EXIT_FAILURE;
   }
-  return 0;
+  return EXIT_SUCCESS;
 }

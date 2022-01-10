@@ -55,7 +55,6 @@ Wordle::Wordle(int word_length) {
 
   srand(time(NULL));
   goal_ = candidates[rand() % candidates.size()];
-
   game_state_.reserve(kAlphabetSize);
   for (size_t i = 0; i < kAlphabetSize; ++i) {
     game_state_.push_back(State::kUnknown);
@@ -113,7 +112,7 @@ vector<std::string> Wordle::GetColorizedGuessAndUpdateGameState(
       }
     }
     guess_with_color.push_back(GetColorizedLetter(state, chr));
-    if (game_state_[chr - 'A'] == State::kCorrect && state == State::kAppears) {
+    if (game_state_[chr - 'A'] == State::kCorrect) {
       continue;
     }
     game_state_[chr - 'A'] = state;
