@@ -112,7 +112,7 @@ vector<std::string> Wordle::GetColorizedGuessAndUpdateGameState(
       }
     }
     guess_with_color.push_back(GetColorizedLetter(state, chr));
-    if (game_state_[chr - 'A'] == State::kCorrect) {
+    if (game_state_[chr - 'A'] >= state) {
       continue;
     }
     game_state_[chr - 'A'] = state;

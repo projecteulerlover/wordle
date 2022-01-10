@@ -6,10 +6,10 @@
 
 // State corresponding to result for each letter.
 enum class State {
+  kUnknown = -1,  // black in UI
   kNone = 0,     // gray in UI
   kAppears = 1,  // yellow in UI
   kCorrect = 2,  // green in UI
-  kUnknown = 3,  // black in UI
 };
 
 // Word length.
