@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <windows.h>
 
 #include <algorithm>
 #include <experimental/set>
@@ -71,7 +72,8 @@ void Wordle::Play() {
     if (won) {
       int tries = guesses_.size() + 1;
       cout << "\033[1;32mCongrats, your guess was correct!\033[0m "
-           << "It only took you " << tries << (tries == 1 ? " try " : " tries ") << ":)" << endl;
+           << "It only took you " << tries << (tries == 1 ? " try " : " tries ")
+           << ":)" << endl;
       return;
     } else {
       cout << "Game state so far: \n";
