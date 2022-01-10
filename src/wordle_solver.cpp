@@ -75,7 +75,7 @@ bool WordleSolver::ValidConstraints(string_view guess, string_view result) {
 }
 
 bool WordleSolver::FitsConstraints(string_view word) {
-  int32_t index = 0;
+  int index = 0;
   for (const auto &chr : word) {
     if (!IsLetterAllowed(constraints_.letters[index++], chr)) {
       return false;

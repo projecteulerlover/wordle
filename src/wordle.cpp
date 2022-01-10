@@ -70,7 +70,7 @@ void Wordle::Play() {
     bool won = GuessOnce();
     if (won) {
       cout << "Congrats, your guess was correct!" << endl;
-      break;
+      return;
     } else {
       cout << "Game state so far: \n";
       for (const auto& row : kKeyboardView) {
@@ -87,24 +87,36 @@ void Wordle::Play() {
 vector<std::string> Wordle::GetColorizedGuessAndUpdateGameState(
     string_view guess) {
   vector<std::string> guess_with_color;
-  
+  vector<State> states(length_, State::kUnknown);
   for (size_t i = 0; i < length_; ++i) {
     const char chr = guess[i];
-    const auto position = goal_.find(chr);
-    State state;
-    if (position == string::npos) {
-      state = State::kNone;
-    } else if (chr == goal_[i]) {
-      state = State::kCorrect;
-    } else {
-      state = State::kAppears;
+    if (chr == goal_[i]) {
+      states[i] = State::kCorrect;
     }
+  }
+  for (size_t i = 0; i < length_; ++i) {
+    const char chr = guess[i];
+    size_t index = 0;
+    const auto position = find_if(
+        goal_.begin(), goal_.end(), [&index, &states, &chr](const char c) {
+          return states[index++] != State::kCorrect && c == chr;
+        });
+    State state = states[i];
+    if (state == State::kUnknown) {
+      if (position == goal_.end()) {
+        state = State::kNone;
+      } else {
+        state = State::kAppears;
+      }
+    }
+    cout << static_cast<int>(state);
     guess_with_color.push_back(GetColorizedLetter(state, chr));
     if (game_state_[chr - 'A'] == State::kCorrect && state == State::kAppears) {
       continue;
     }
     game_state_[chr - 'A'] = state;
   }
+
   return guess_with_color;
 }
 
@@ -139,7 +151,7 @@ bool Wordle::GuessOnce() {
   if (guess == goal_) {
     return true;
   }
-  
+
   guesses_.push_back(GetColorizedGuessAndUpdateGameState(guess));
 
   return false;

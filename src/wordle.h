@@ -13,6 +13,8 @@ class Wordle {
  public:
   Wordle(int word_length);
 
+  ~Wordle();
+
   void Play();
 
  private:
