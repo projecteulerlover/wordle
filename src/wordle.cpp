@@ -59,6 +59,7 @@ Wordle::Wordle(int word_length) {
   for (size_t i = 0; i < kAlphabetSize; ++i) {
     game_state_.push_back(State::kUnknown);
   }
+  goal_ = "ELITE";
   // Delete this.
   // cout << goal_ << endl;
 }
